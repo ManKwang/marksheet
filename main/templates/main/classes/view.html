@@ -1,0 +1,42 @@
+{% extends 'main/base_dashboard.html' %}
+
+{% block title %}
+    Перегляд класу
+{% endblock %}
+
+{% block main_content %}
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Перегляд класу</h1>
+        </div>
+
+        <button type="button" class="btn btn-outline-primary" to-page="{% url 'add_student_url' c_id=current_class.id %}" style="margin-bottom: 10px;">Додати учня</button>
+        <div class="row">
+            <div class="col overflow-auto" style="max-height: 150px;">
+                <table class="table table-sm">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Ім'я</th>
+                        <th scope="col">Прізвище</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for i in tr %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="col">
+
+            </div>
+        </div>
+
+    </main>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'main/base_dashboard.html' %}
+
+{% block title %}
+    Створити клас
+{% endblock %}
+
+{% block main_content %}
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Створити клас</h1>
+        </div>
+
+        <div class="alert alert-warning" role="alert">
+            Уважно перевіряйте введені Вами дані, після підтвердження форми змінити їх буде неможливо!
+        </div>
+
+        <form action="{% url 'create_class_url' code=code %}" method="post">
+            {% csrf_token %}
+            {% for field in form %}
+
+                {% if field.errors %}
+                    {% for error in field.errors %}
+                        <div class="alert alert-danger">{{ error }}</div>
+                    {% endfor %}
+
+                {% endif %}
+
+            {% endfor %}
+
+            {% for field in form %}
+                <div class="form-group">
+                    {{ field }}
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="btn btn-primary">Підтвердити</button>
+        </form>
+
+    </main>
+
+{% endblock %}

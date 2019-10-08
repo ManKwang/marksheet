@@ -1,0 +1,53 @@
+{% extends 'main/base_dashboard.html' %}
+
+{% block title %}
+    Класи
+{% endblock %}
+
+{% block main_content %}
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Класи</h1>
+        </div>
+
+        {% if classes_list %}
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Назва НЗ</th>
+                    <th scope="col">Директор</th>
+                    <th scope="col">Рік</th>
+                    <th scope="col">Створено</th>
+                    <th scope="col">Дії</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for classes in classes_list %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ classes.school_name }}</td>
+                        <td>{{ classes.director_name }}</td>
+                        <td>{{ classes.year }}</td>
+                        <td>{{ classes.created_at }}</td>
+                        {% if not classes.assigned_code.is_past_due %}
+                            <td><a href="{% url 'class_view_url' %}?c_id={{ classes.id }}" class="def-link"><i class="fas fa-pen"></i></a></td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        {% else %}
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h1 class="display-4">Помилка</h1>
+                    <p class="lead">На даний момент немає створених Вами класів. Для того, щоб створити клас, перейдіть
+                        на
+                        <a href="{% url 'dashboard_index_url' %}">головну сторінку</a> панелі управління</p>
+                </div>
+            </div>
+        {% endif %}
+
+    </main>
+{% endblock %}

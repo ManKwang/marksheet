@@ -1,0 +1,125 @@
+{% extends 'main/base_dashboard.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    Додати учня
+{% endblock %}
+
+{% block main_content %}
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Додати учня</h1>
+        </div>
+
+        <form method="post" action="{% url 'add_student_url' c_id=c_id %}">
+            {% csrf_token %}
+            {% for field in form %}
+                {% if field.name == 'passport_lot' %}
+                    <div class="row">
+                        <div class="col-2">
+                            <div class="form-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+                                {{ field }}
+                                {% if field.errors %}
+                                    {% for error in field.errors %}
+                                        <small class="form-text text-muted">{{ error }}</small>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% elif field.name == 'passport_number' %}
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+                                {{ field }}
+                                {% if field.errors %}
+                                    {% for error in field.errors %}
+                                        <small class="form-text text-muted">{{ error }}</small>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% elif field.name == 'first_name' %}
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+                                {{ field }}
+                                {% if field.errors %}
+                                    {% for error in field.errors %}
+                                        <small class="form-text text-muted">{{ error }}</small>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% elif field.name == 'last_name' %}
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+                                {{ field }}
+                                {% if field.errors %}
+                                    {% for error in field.errors %}
+                                        <small class="form-text text-muted">{{ error }}</small>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% elif field.name == 'third_name' %}
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+                                {{ field }}
+                                {% if field.errors %}
+                                    {% for error in field.errors %}
+                                        <small class="form-text text-muted">{{ error }}</small>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="form-group">
+                        <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+                        {{ field }}
+                        {% if field.errors %}
+                            {% for error in field.errors %}
+                                <small class="form-text text-muted">{{ error }}</small>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+            {% endfor %}
+
+            <button type="submit" class="btn btn-primary">Підтвердити</button>
+        </form>
+
+    </main>
+{% endblock %}
+
+{% block add_scripts %}
+    <div style="display: none;" id="pub-key">-----BEGIN RSA PUBLIC KEY-----
+        MIGJAoGBAKA0Lq1WR088/CfafEWl7PGko1FVICtHIy86tCIYQzWx1e8gFhwLNIYf
+        XppTeogEqCKucBUY+UQj5VC2E8adquNLrw2xhu2UyPnAkc2+7HV8VcPb8hhO2DAL
+        Dk3NU2PSYdRfs5RXwcAe2BLCx3mkNxBDxe5X3DTSLRdqh1Ru90tlAgMBAAE=
+        -----END RSA PUBLIC KEY-----
+    </div>
+
+    <script src="{% static 'js/jsbn.js' %}"></script>
+    <script src="{% static 'js/random.js' %}"></script>
+    <script src="{% static 'js/hash.js' %}"></script>
+    <script src="{% static 'js/rsa.js' %}"></script>
+    <script src="{% static 'js/aes.js' %}"></script>
+    <script src="{% static 'js/api.js' %}"></script>
+    <script>
+
+
+        function encryptText(text) {
+            var MattsPublicKeyString = cryptico.publicKeyString('MIGJAoGBAKA0Lq1WR088/CfafEWl7PGko1FVICtHIy86tCIYQzWx1e8gFhwLNIYf XppTeogEqCKucBUY+UQj5VC2E8adquNLrw2xhu2UyPnAkc2+7HV8VcPb8hhO2DAL Dk3NU2PSYdRfs5RXwcAe2BLCx3mkNxBDxe5X3DTSLRdqh1Ru90tlAgMBAAE=');
+
+            return cryptico.encrypt(text, MattsPublicKeyString);
+        }
+
+    </script>
+{% endblock %}
