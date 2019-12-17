@@ -22,11 +22,11 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for i in tr %}
+                    {% for item in students_list %}
                         <tr>
                             <th scope="row">{{ forloop.counter }}</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
+                            <td>{{ item.first_name }}</td>
+                            <td>{{ item.last_name }}</td>
                         </tr>
                     {% endfor %}
 

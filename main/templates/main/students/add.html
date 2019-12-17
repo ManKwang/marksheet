@@ -97,29 +97,3 @@
 
     </main>
 {% endblock %}
-
-{% block add_scripts %}
-    <div style="display: none;" id="pub-key">-----BEGIN RSA PUBLIC KEY-----
-        MIGJAoGBAKA0Lq1WR088/CfafEWl7PGko1FVICtHIy86tCIYQzWx1e8gFhwLNIYf
-        XppTeogEqCKucBUY+UQj5VC2E8adquNLrw2xhu2UyPnAkc2+7HV8VcPb8hhO2DAL
-        Dk3NU2PSYdRfs5RXwcAe2BLCx3mkNxBDxe5X3DTSLRdqh1Ru90tlAgMBAAE=
-        -----END RSA PUBLIC KEY-----
-    </div>
-
-    <script src="{% static 'js/jsbn.js' %}"></script>
-    <script src="{% static 'js/random.js' %}"></script>
-    <script src="{% static 'js/hash.js' %}"></script>
-    <script src="{% static 'js/rsa.js' %}"></script>
-    <script src="{% static 'js/aes.js' %}"></script>
-    <script src="{% static 'js/api.js' %}"></script>
-    <script>
-
-
-        function encryptText(text) {
-            var MattsPublicKeyString = cryptico.publicKeyString('MIGJAoGBAKA0Lq1WR088/CfafEWl7PGko1FVICtHIy86tCIYQzWx1e8gFhwLNIYf XppTeogEqCKucBUY+UQj5VC2E8adquNLrw2xhu2UyPnAkc2+7HV8VcPb8hhO2DAL Dk3NU2PSYdRfs5RXwcAe2BLCx3mkNxBDxe5X3DTSLRdqh1Ru90tlAgMBAAE=');
-
-            return cryptico.encrypt(text, MattsPublicKeyString);
-        }
-
-    </script>
-{% endblock %}

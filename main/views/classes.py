@@ -1,4 +1,4 @@
-from main.models import Code, Classes
+from main.models import Code, Classes, Students
 from django.shortcuts import render, redirect
 from django.views.generic import View
 from main.forms import CreateClassForm
@@ -64,6 +64,6 @@ class ClassView(View):
         if not current_class or current_class.created_by != request.user:
             return redirect('classes_index_url')
 
-        test_rows = [i for i in range(5)]
-
-        return render(request, 'main/classes/view.html', context={'current_class': current_class, 'tr': test_rows})
+        return render(request, 'main/classes/view.html',
+                      context={'current_class': current_class,
+                               'students_list': Students.objects.filter(assigned_class=current_class)})

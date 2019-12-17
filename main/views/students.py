@@ -1,4 +1,4 @@
-from main.models import Code, Classes
+from main.models import Code, Classes, Students
 from django.shortcuts import render, redirect
 from django.views.generic import View
 from main.forms import AddStudentForm
@@ -58,6 +58,17 @@ class AddStudent(View):
         print('--------------------')
 
         if form.is_valid():
+            student = Students()
+            student.first_name = form.cleaned_data['first_name']
+            student.last_name = form.cleaned_data['last_name']
+            student.third_name = form.cleaned_data['third_name']
+            student.assigned_class = class_
+            student.passport_lot = form.cleaned_data['passport_lot']
+            student.passport_number = form.cleaned_data['passport_number']
+            student.gender = form.cleaned_data['gender']
+
+            student.save()
+
             return redirect('add_student_url', c_id=c_id)
 
         return render(request, 'main/students/add.html', context={'c_id': c_id, 'form': form})
